@@ -1,15 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { loadEnv } from 'vite'
+
+const env = loadEnv(process.env.NODE_ENV, process.cwd(), '')
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react({})],
+  plugins: [react()],
+  assetsInclude: ['**/*.woff', '**/*.woff2'],
+
   server: {
     proxy: {
       '/api': {
-        target: 'http://ec2-15-165-55-217.ap-northeast-2.compute.amazonaws.com',
+        target: env.VITE_API_URL,
         changeOrigin: true,
-        secure: false,
         rewrite: path => path.replace(/^\/api/, ''),
       },
     },
