@@ -1,9 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
+      "source": "/(.*)",
       "destination": "http://ec2-15-165-55-217.ap-northeast-2.compute.amazonaws.com/:path*"
     }
-  ],
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+  ]
 }
